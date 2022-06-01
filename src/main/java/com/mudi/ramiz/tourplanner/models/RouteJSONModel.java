@@ -1,32 +1,34 @@
 package com.mudi.ramiz.tourplanner.models;
 
+import java.util.List;
+
 public class RouteJSONModel {
 
-    private String from;
-    private String to;
+    public List<String> locations;
+    public RouteOptionModel options;
 
     public RouteJSONModel() {
 
     }
 
-    public RouteJSONModel(String from, String to) {
-        this.from = from;
-        this.to = to;
+    public RouteJSONModel(List<String> locations, RouteOptionModel routeOptionModel) {
+        this.locations = locations;
+        this.options = routeOptionModel;
     }
 
-    public String getFrom() {
-        return from;
+    public List<String> getLocations() {
+        return locations;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
     }
 
-    public String getTo() {
-        return to;
+    public RouteOptionModel getOptions() {
+        return options;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setOptions(RouteOptionModel options) {
+        this.options = options;
     }
 }

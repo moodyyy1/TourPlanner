@@ -35,4 +35,13 @@ public class DirectionsModel {
     public void setTime(Float time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "DirectionsModel{" +
+                "image='" + image + '\'' +
+                ", distance=" + distance +
+                ", time=" + time +
+                '}';
+    }
 }
