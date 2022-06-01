@@ -21,6 +21,7 @@ public class Database {
     private final String sqlUserName;
     private final String sqlUserPassword;
     private Connection connection;
+    private static Database db = null;
 
     public Database() {
         this.sqlURL = Config.getInstance().getSQLUrl();
@@ -93,5 +94,13 @@ public class Database {
         printText(INFO, "Database table 'Tour_Data' successfully created!");
 
         closeConnection();
+    }
+
+    public static Database getInstance() {
+        if (db == null) {
+            db = new Database();
+        }
+
+        return db;
     }
 }

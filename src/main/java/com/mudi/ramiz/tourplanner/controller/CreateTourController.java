@@ -1,9 +1,9 @@
 package com.mudi.ramiz.tourplanner.controller;
 
 import com.mudi.ramiz.tourplanner.models.TourModel;
-import com.mudi.ramiz.tourplanner.provider.Provider;
 import com.mudi.ramiz.tourplanner.ui.Alert;
 import com.mudi.ramiz.tourplanner.utils.Utils;
+import com.mudi.ramiz.tourplanner.viewmodel.CreateTourViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,11 +31,14 @@ public class CreateTourController {
 
     public Stage stage;
 
+    public static CreateTourViewModel createTourViewModel;
+
     public static NewDataInterface newData;
 
     public static CreateTourController show(NewDataInterface newDataInterface) {
         FXMLLoader loader = new FXMLLoader(CreateTourController.class.getResource("/createTour.fxml"));
         Stage stage = new Stage();
+        createTourViewModel = new CreateTourViewModel();
         newData = newDataInterface;
 
         try {
@@ -68,7 +71,7 @@ public class CreateTourController {
     public void saveTour() {
         TourModel tourModel = getCurrentTourModel();
         if (Utils.validateData(tourModel)) {
-            Provider.getTourDao().addTour(tourModel);
+            createTourViewModel.saveTour(tourModel);
             newData.newData();
             closeWindow();
         } else {

@@ -1,9 +1,7 @@
 package com.mudi.ramiz.tourplanner.controller;
 
 import com.mudi.ramiz.tourplanner.models.TourModel;
-import com.mudi.ramiz.tourplanner.provider.Provider;
-import com.mudi.ramiz.tourplanner.utils.Utils;
-import javafx.collections.ObservableList;
+import com.mudi.ramiz.tourplanner.viewmodel.MainViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -16,8 +14,11 @@ public class MainController implements NewDataInterface {
     @FXML
     public Button createButton;
 
+    private final MainViewModel mainViewModel;
+
     public MainController() {
         tourList = new TableView<>();
+        mainViewModel = new MainViewModel();
     }
 
     @FXML
@@ -35,9 +36,7 @@ public class MainController implements NewDataInterface {
 
     @Override
     public void newData() {
-        ObservableList<TourModel> tourModelObservableList = Utils.getObservableFromList(Provider.getTourDao().getAllTours());
-
-        this.tourList.setItems(tourModelObservableList);
+        this.tourList.setItems(this.mainViewModel.getTours());
         this.tourList.refresh();
     }
 }
