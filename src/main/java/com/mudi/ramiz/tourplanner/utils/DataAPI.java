@@ -30,7 +30,7 @@ public class DataAPI {
 
         System.out.println(jsonReq);
 
-        HttpRequest httpRequest = getHTTPRequestWithKey("http://www.mapquestapi.com/directions/v2/route?key=" + key, jsonReq);
+        HttpRequest httpRequest = postHTTPRequestWithJSON("http://www.mapquestapi.com/directions/v2/route?key=" + key, jsonReq);
 
         try {
             HttpResponse<String> httpResponse = getCompletableFuture(httpClient, httpRequest).get();
@@ -43,10 +43,24 @@ public class DataAPI {
         return null;
     }
 
-    private static HttpRequest getHTTPRequestWithKey(String url, String jsonReq) {
+    public static String getMapImage(String fromLocation, String toLocation, Double imageHeight, Double imageWidth) {
+        return "https://open.mapquestapi.com/staticmap/v5/map?locations="
+                + fromLocation + "%7C%7C" + toLocation + "&size=" + imageHeight.intValue() + "," + imageWidth.intValue() + "@2x"
+                + "&format=png" + "&key=" + key;
+    }
+
+    private static HttpRequest postHTTPRequestWithJSON(String url, String jsonReq) {
         return HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(jsonReq))
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+    }
+
+    private static HttpRequest getHTTPRequest(String url) {
+        return HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
                 .version(HttpClient.Version.HTTP_1_1)
                 .build();
     }

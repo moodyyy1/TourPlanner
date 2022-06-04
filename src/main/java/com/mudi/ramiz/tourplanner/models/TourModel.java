@@ -13,7 +13,7 @@ public class TourModel {
     public Float tourTransportDistance;
     public Float tourEstimatedTime;
     public String tourRoutInformation;
-
+    
     public TourModel() {
 
     }

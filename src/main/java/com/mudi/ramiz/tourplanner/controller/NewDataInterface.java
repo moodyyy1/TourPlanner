@@ -4,4 +4,5 @@ public interface NewDataInterface {
 
     void newData();
 
+    void clickedTour(String image);
 }

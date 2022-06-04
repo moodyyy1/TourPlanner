@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <VBox prefHeight="600.0" prefWidth="900.0" spacing="10.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/18" fx:controller="com.mudi.ramiz.tourplanner.controller.MainController">
@@ -49,8 +50,11 @@
                 <Button prefWidth="100.0" text="Export"/>
             </HBox>
 
-            <ListView prefWidth="200.0"/>
-
+            <ImageView
+                    fx:id="tourImage"
+                    fitWidth="400"
+                    fitHeight="200">
+            </ImageView>
         </VBox>
         <TableView fx:id="tourList" minWidth="-Infinity" prefWidth="790.0">
             <columnResizePolicy>
