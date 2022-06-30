@@ -15,5 +15,4 @@ public class CreateTourViewModel {
     public void saveTour(TourModel tourModel) {
         tourService.addTour(tourModel);
     }
-
 }

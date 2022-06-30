@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static com.mudi.ramiz.tourplanner.utils.Utils.LOG_TYPE.ERROR;
@@ -137,6 +139,31 @@ public class LogDao implements LogDaoInterface {
             printText(ERROR, "Database error (" + sqlException.getMessage() + ")");
         }
 
+        return null;
+    }
+
+    @Override
+    public List<TourLogModel> getAllLogs() {
+        try {
+            database.establishConnection();
+
+            PreparedStatement preparedStatement = database.getConnection().prepareStatement(DB_GET_ALL_LOGS);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            System.out.println(resultSet);
+
+            List<TourLogModel> allTourLogs = new ArrayList<>();
+
+            while (resultSet.next()) {
+                UUID logUUID = UUID.fromString(resultSet.getString("logUUID"));
+                TourLogModel logModel = getLog(logUUID);
+                allTourLogs.add(logModel);
+            }
+            return allTourLogs;
+
+        } catch (SQLException sqlException) {
+            printText(ERROR, "Database error (" + sqlException.getMessage() + ")");
+        }
         return null;
     }
 }
