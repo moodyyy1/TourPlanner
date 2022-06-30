@@ -46,6 +46,9 @@ public class Database {
             if (!connection.getMetaData().getTables(null, null, "tour_data", null).next()) {
                 createTourTable();
             }
+            if (!connection.getMetaData().getTables(null, null, "log_data", null).next()) {
+                createLogTable();
+            }
             closeConnection();
         }
     }
@@ -72,13 +75,6 @@ public class Database {
     public void createTourTable() throws SQLException {
         establishConnection();
 
-        boolean tableCreated = connection.getMetaData().getTables(null, null, "users", null).next();
-
-        if (tableCreated) {
-            closeConnection();
-            return;
-        }
-
         Statement statement = connection.createStatement();
         String createUserSQLTable =
                 "Create Table TOUR_DATA(" +
@@ -92,6 +88,27 @@ public class Database {
         statement.executeUpdate(createUserSQLTable);
         statement.close();
         printText(INFO, "Database table 'Tour_Data' successfully created!");
+
+        closeConnection();
+    }
+
+    public void createLogTable() throws SQLException {
+        establishConnection();
+
+        Statement statement = connection.createStatement();
+        String createUserSQLTable =
+                "Create Table LOG_DATA(" +
+                        "logUUID VARCHAR(36) PRIMARY KEY UNIQUE," +
+                        "tourUUID VARCHAR(36)," +
+                        "logDate TEXT NOT NULL," +
+                        "tourComment TEXT NOT NULL," +
+                        "tourDifficulty INTEGER NOT NULL," +
+                        "tourTotalTime FLOAT NOT NULL," +
+                        "tourRating INTEGER NOT NULL)";
+
+        statement.executeUpdate(createUserSQLTable);
+        statement.close();
+        printText(INFO, "Database table 'Log_Data' successfully created!");
 
         closeConnection();
     }
