@@ -102,7 +102,7 @@ public class Database {
                         "tourUUID VARCHAR(36)," +
                         "logDate TEXT NOT NULL," +
                         "tourComment TEXT NOT NULL," +
-                        "tourDifficulty INTEGER NOT NULL," +
+                        "tourDifficulty TEXT NOT NULL," +
                         "tourTotalTime FLOAT NOT NULL," +
                         "tourRating INTEGER NOT NULL)";
 

@@ -1,13 +1,20 @@
 package com.mudi.ramiz.tourplanner.service;
 
+import com.mudi.ramiz.tourplanner.database.Database;
+import com.mudi.ramiz.tourplanner.database.LogDao;
 import com.mudi.ramiz.tourplanner.database.LogDaoInterface;
 import com.mudi.ramiz.tourplanner.models.TourLogModel;
 
+import java.util.List;
 import java.util.UUID;
 
 public class LogService implements LogServiceInterface {
 
     public static LogDaoInterface logDAO;
+
+    public LogService() {
+        logDAO = new LogDao(Database.getInstance());
+    }
 
     @Override
     public void createLog(TourLogModel tourLogModel) {
@@ -27,5 +34,10 @@ public class LogService implements LogServiceInterface {
     @Override
     public TourLogModel getLog(UUID logUUID) {
         return logDAO.getLog(logUUID);
+    }
+
+    @Override
+    public List<TourLogModel> getAllLogs() {
+        return logDAO.getAllLogs();
     }
 }

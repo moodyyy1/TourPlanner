@@ -6,7 +6,7 @@ import com.mudi.ramiz.tourplanner.service.TourServiceInterface;
 
 public class CreateTourViewModel {
 
-    private TourServiceInterface tourService;
+    private final TourServiceInterface tourService;
 
     public CreateTourViewModel() {
         tourService = new TourService();

@@ -1,5 +1,6 @@
 package com.mudi.ramiz.tourplanner.utils;
 
+import com.mudi.ramiz.tourplanner.models.TourLogModel;
 import com.mudi.ramiz.tourplanner.models.TourModel;
 
 public class Utils {
@@ -24,4 +25,9 @@ public class Utils {
                 !tourModel.getTourTransportType().isEmpty();
     }
 
+    public static boolean validateData(TourLogModel tourModel) {
+        return !tourModel.getTourComment().isEmpty() && !tourModel.getTourDifficulty().isEmpty() &&
+                tourModel.getTourRatingOutOf10() != null && tourModel.getLogDate() != null &&
+                tourModel.getTourTotalTime() != null;
+    }
 }
